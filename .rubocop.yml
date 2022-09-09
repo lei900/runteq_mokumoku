@@ -406,3 +406,5 @@ Style/HashSyntax:
   Enabled: false
 Style/MethodCalledOnDoEndBlock:
   Enabled: false
+Rails/I18nLocaleTexts:
+  Enabled: false
