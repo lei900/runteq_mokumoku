@@ -14,7 +14,7 @@ class Mypage::PasswordChangesController < Mypage::BaseController
 
   private
 
-  def user_params
-    params.require(:user).permit(:password, :password_confirmation)
-  end
+    def user_params
+      params.require(:user).permit(:password, :password_confirmation)
+    end
 end

@@ -23,7 +23,7 @@ RSpec.describe 'Api::Me::Events', type: :request do
           'id' => event.id,
           'title' => be_present,
           'start' => be_present,
-          'url' => be_present
+          'url' => be_present,
         )
       end)
     end
