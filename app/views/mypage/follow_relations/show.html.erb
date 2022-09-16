@@ -1,0 +1,14 @@
+<div class="card">
+  <!-- Card header -->
+  <div class="card-header">
+    <i class="bi bi-person"></i>
+    <%= @title %>
+  </div>
+  <!-- Card body -->
+  <ul class="list-group list-group-flush">
+    <% if @users.any? %>
+        <%= render partial: 'user', collection: @users %>
+      <%= paginate @users %>
+    <% end %>
+  </ul>
+</div>

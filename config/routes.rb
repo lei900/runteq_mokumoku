@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   namespace :mypage do
     root 'event_calendars#show'
+    get 'followers', to: 'follow_relations#followers'
+    get 'following', to: 'follow_relations#following'
     resource :event_calendar, only: %i[show]
     resources :notifications, only: %i[index]
     resource :notification_setting, only: %i[show update]
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
       resource :avatar, only: %i[destroy], module: :profiles
     end
     resource :password_change, only: %i[show update]
+    resource :follow_relations, only: %i[create destroy]
   end
 
   namespace :api, defaults: { format: :json } do

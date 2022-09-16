@@ -1,0 +1,7 @@
+<li class="list-group-item follow-relation-list d-flex flex-row justify-content-between">
+  <div>
+    <%= image_tag user.decorate.avatar, class: 'avatar-md rounded-circle border border-4 border-white' %>
+    <%= link_to user.name, user, class: "fs-4" %>
+  </div>
+  <%= render 'follow_button', user: user %>
+</li>

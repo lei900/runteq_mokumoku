@@ -1,0 +1,3 @@
+<%= button_to "フォロー解除", mypage_follow_relations_path(followed_id: user.id), 
+              remote: true, method: :delete, 
+              class: "btn btn-secondary rounded text-light text-center" %>
