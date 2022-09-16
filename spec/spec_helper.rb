@@ -96,4 +96,5 @@ RSpec.configure do |config|
   config.before :suite do
     load Rails.root.join('db/seeds.rb')
   end
+  require 'capybara/rspec'
 end

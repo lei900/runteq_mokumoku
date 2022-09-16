@@ -2,3 +2,4 @@
 
 require_relative '../seeds/prefectures'
 require_relative '../seeds/notification_timings'
+require_relative '../seeds/events'

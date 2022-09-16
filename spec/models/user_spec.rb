@@ -84,5 +84,18 @@ RSpec.describe User, type: :model do
         end.to change { EventAttendance.count }.by(-1)
       end
     end
+
+    describe 'follow and unfollow' do
+      let!(:user_a) { create(:user) }
+      let!(:user_b) { create(:user) }
+      it 'should follow and unfollow a user' do
+        expect(user_a.following?(user_b)).to be false
+        user_a.follow(user_b)
+        expect(user_b.followers.include?(user_a)).to be true
+        expect(user_a.following?(user_b)).to be true
+        user_a.unfollow(user_b)
+        expect(user_b.followers).not_to include(user_a)
+      end
+    end
   end
 end
