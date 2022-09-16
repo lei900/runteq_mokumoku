@@ -1,0 +1,6 @@
+<div class="text-center">
+  <%= button_to "フォロー解除", 
+                relationship_path(current_user.active_relationships.find_by(followed_id: user.id)), 
+                remote: true, method: :delete, 
+                class: "btn btn-secondary rounded text-light col-8 text-center" %>
+</div>

@@ -20,4 +20,8 @@ module ApplicationHelper
   def active_action?(*names)
     names.any?("#{controller_path}##{action_name}")
   end
+
+  def current_user?(user)
+    user && user == current_user
+  end
 end

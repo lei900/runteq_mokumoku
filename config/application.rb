@@ -44,5 +44,8 @@ module Mokumoku
     # config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
+
+    # 認証トークンをremoteフォームに埋め込む
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end
