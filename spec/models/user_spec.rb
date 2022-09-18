@@ -59,6 +59,20 @@ RSpec.describe User, type: :model do
         expect(User.allowing_liked_event_notification).not_to include(not_allowed_user)
       end
     end
+
+    describe 'allowing_following_attended_to_event_notification' do
+      let!(:allowed_user) do
+        user = create(:user)
+        user.notification_timings << NotificationTiming.find_by!(timing: :following_attended_to_event)
+        user
+      end
+      let!(:not_allowed_user) { create(:user) }
+
+      it '対象が正しいこと' do
+        expect(User.allowing_following_attended_to_event_notification).to include(allowed_user)
+        expect(User.allowing_following_attended_to_event_notification).not_to include(not_allowed_user)
+      end
+    end
   end
 
   describe 'メソッド' do

@@ -28,4 +28,11 @@ class NotificationFacade
 
     EventMailer.with(user: receiver, bookmark: bookmark).liked_event.deliver_later
   end
+
+  def self.following_attended_to_event(event_attendance, receiver)
+    Notification.following_attended_to_event(event_attendance, receiver)
+    return unless receiver.allow_following_attended_to_event_notification?
+
+    EventMailer.with(user: receiver, event_attendance: event_attendance).following_attended_to_event.deliver_later
+  end
 end

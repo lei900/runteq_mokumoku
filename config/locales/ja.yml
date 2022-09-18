@@ -6,3 +6,4 @@ ja:
         commented_to_event: あなたのイベントにコメントがあった時
         attended_to_event: あなたのイベントに参加申し込みがあった時
         liked_event: あなたのイベントにいいねがついた時
+        following_attended_to_event: フォロー中のユーザーがイベントに参加した時

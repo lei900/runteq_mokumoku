@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Events', type: :system do
   include_context 'user setup'
-  
+
   describe 'イベント一覧ページ' do
     it 'ユーザー名をクリックしてユーザー詳細ページへ遷移できる' do
       expect_access_user_show_page(user)

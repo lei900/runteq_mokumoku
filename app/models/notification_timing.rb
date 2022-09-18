@@ -7,5 +7,6 @@ class NotificationTiming < ApplicationRecord
     commented_to_event: 1,
     attended_to_event: 2,
     liked_event: 3,
+    following_attended_to_event: 4,
   }
 end

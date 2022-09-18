@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
   include_context 'user setup'
-  
+
   describe 'ユーザー詳細ページ' do
     context '自分の詳細ページ' do
       it 'フォロ関連数字のみが表示される' do

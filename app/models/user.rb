@@ -38,6 +38,8 @@ class User < ApplicationRecord
         -> { joins(:notification_timings).merge(NotificationTiming.attended_to_event) }
   scope :allowing_liked_event_notification,
         -> { joins(:notification_timings).merge(NotificationTiming.liked_event) }
+  scope :allowing_following_attended_to_event_notification,
+        -> { joins(:notification_timings).merge(NotificationTiming.following_attended_to_event) }
 
   def owner?(event)
     event.user_id == id
@@ -85,6 +87,10 @@ class User < ApplicationRecord
 
   def allow_liked_event_notification?
     notification_timings.liked_event.present?
+  end
+
+  def allow_following_attended_to_event_notification?
+    notification_timings.following_attended_to_event.present?
   end
 
   def follow(other_user)

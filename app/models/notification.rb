@@ -13,6 +13,7 @@ class Notification < ApplicationRecord
     commented_to_event: 1,
     attended_to_event: 2,
     liked_event: 3,
+    following_attended_to_event: 4,
   }, _prefix: true
 
   scope :with_avatar, -> { preload(sender: { avatar_attachment: :blob }) }
@@ -58,6 +59,17 @@ class Notification < ApplicationRecord
       notifiable: bookmark,
       read: false,
       message: "#{bookmark.user.name}がイベント【#{bookmark.event.title}】をブックマークしました",
+    )
+  end
+
+  def self.following_attended_to_event(event_attendance, receiver)
+    Notification.create!(
+      kind: :following_attended_to_event,
+      receiver: receiver,
+      sender: event_attendance.user,
+      notifiable: event_attendance,
+      read: false,
+      message: "#{event_attendance.user.name}が参加するイベントがありました",
     )
   end
 
