@@ -2,14 +2,12 @@
 
 class Mypage::FollowRelationsController < Mypage::BaseController
   def following
-    @user = current_user
     @title = 'フォロ中'
     @users = current_user.following.page(params[:page])
     render 'show'
   end
 
   def followers
-    @user = current_user
     @title = 'フォロワー'
     @users = current_user.followers.page(params[:page])
     render 'show'

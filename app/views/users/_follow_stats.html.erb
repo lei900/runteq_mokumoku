@@ -2,18 +2,18 @@
   <div class="d-flex justify-content-center mb-5">
     <div class='mx-4 text-center'>
       <strong id="following">
-        <%= @user.following.count %>
+        <%= user.following.count %>
       </strong>
       <br>
       フォロー中
     </div>
     <div class='mx-4 text-center'>
       <strong id="followers">
-        <%= @user.followers.count %>
+        <%= user.followers.count %>
       </strong>
       <br>
       フォロワー
     </div>
   </div>
-  <%= render 'follow_button', user: @user %>
+  <%= render 'follow_button', user: user %>
 </div>

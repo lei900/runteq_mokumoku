@@ -2,7 +2,6 @@
 
 class Mypage::EventCalendarsController < Mypage::BaseController
   def show
-    @user = current_user
     @bookmark_events = current_user.bookmark_events
     @future_events = current_user.attend_events.future
     @past_events = current_user.attend_events.past

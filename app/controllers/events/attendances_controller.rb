@@ -7,8 +7,8 @@ class Events::AttendancesController < ApplicationController
     (@event.attendees - [current_user] + [@event.user]).uniq.each do |user|
       NotificationFacade.attended_to_event(event_attendance, user)
     end
-    current_user.followers.each do |user|
-      NotificationFacade.following_attended_to_event(event_attendance, user)
+    current_user.followers.each do |follower|
+      NotificationFacade.following_attended_to_event(event_attendance, follower)
     end
 
     redirect_back(fallback_location: root_path, success: '参加の申込をしました')
