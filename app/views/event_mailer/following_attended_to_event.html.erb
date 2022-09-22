@@ -1,0 +1,3 @@
+<%= @event_attendance.user.name %>が参加するイベントがありました！
+下記URLにて詳細をご確認ください
+<%= link_to @event_attendance.event.title, event_url(@event_attendance.event) %>

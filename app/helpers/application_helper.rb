@@ -14,10 +14,14 @@ module ApplicationHelper
   end
 
   def active_namespace?(*namespaces)
-    namespaces.any? { |namespace| controller_path.start_with?(namespace) }
+    namespaces.any? {|namespace| controller_path.start_with?(namespace) }
   end
 
   def active_action?(*names)
     names.any?("#{controller_path}##{action_name}")
+  end
+
+  def current_user?(user)
+    user && user == current_user
   end
 end

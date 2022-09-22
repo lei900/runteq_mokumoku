@@ -24,4 +24,10 @@ class EventMailer < ApplicationMailer
     @user = params[:user]
     mail(to: @user.email, subject: 'イベントがブックマークされました')
   end
+
+  def following_attended_to_event
+    @event_attendance = params[:event_attendance]
+    @user = params[:user]
+    mail(to: @user.email, subject: "#{@event_attendance.user.name}が参加するイベントがありました")
+  end
 end

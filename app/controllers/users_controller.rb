@@ -16,6 +16,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    @bookmark_events = @user.bookmark_events
+    @future_events = @user.attend_events.future
+    @past_events = @user.attend_events.past
+  end
+
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation)
   end

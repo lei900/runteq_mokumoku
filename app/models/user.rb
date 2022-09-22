@@ -12,6 +12,16 @@ class User < ApplicationRecord
   has_many :notifications, foreign_key: :receiver_id, dependent: :destroy, inverse_of: :sender
   has_many :user_notification_timings, dependent: :destroy
   has_many :notification_timings, through: :user_notification_timings
+  has_many :active_relationships,  class_name: 'Relationship',
+                                   foreign_key: 'follower_id',
+                                   dependent: :destroy,
+                                   inverse_of: 'follower'
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy,
+                                   inverse_of: 'followed'
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
   has_one_attached :avatar
 
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
@@ -28,6 +38,8 @@ class User < ApplicationRecord
         -> { joins(:notification_timings).merge(NotificationTiming.attended_to_event) }
   scope :allowing_liked_event_notification,
         -> { joins(:notification_timings).merge(NotificationTiming.liked_event) }
+  scope :allowing_following_attended_to_event_notification,
+        -> { joins(:notification_timings).merge(NotificationTiming.following_attended_to_event) }
 
   def owner?(event)
     event.user_id == id
@@ -75,5 +87,21 @@ class User < ApplicationRecord
 
   def allow_liked_event_notification?
     notification_timings.liked_event.present?
+  end
+
+  def allow_following_attended_to_event_notification?
+    notification_timings.following_attended_to_event.present?
+  end
+
+  def follow(other_user)
+    following << other_user
+  end
+
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy!
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
   end
 end

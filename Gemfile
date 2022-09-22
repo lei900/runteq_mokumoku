@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
+gem 'rails', '~> 6.1.6'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '>= 5.6.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -34,7 +34,6 @@ gem 'rails-i18n'
 gem 'ransack'
 gem 'sorcery'
 
-gem 'factory_bot_rails'
 gem 'faker'
 
 gem 'enum_help'
@@ -45,6 +44,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rb-readline'
+  # Security tools
+  gem 'brakeman'
+  gem 'bundler-audit'
+  # Lint check
+  gem 'rubocop'
+  gem 'rubocop-rails'
+  # Test
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
 
@@ -59,8 +66,12 @@ group :development do
   gem 'spring'
 
   gem 'letter_opener_web'
-  gem 'rubocop', require: false
-  gem 'rubocop-rails', require: false
+end
+
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :production do

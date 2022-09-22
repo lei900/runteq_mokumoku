@@ -4,10 +4,10 @@ class NotificationsController < ApplicationController
   before_action :require_login
 
   def index
-    @notifications = current_user.notifications
-                                 .reads_with_avatar
-                                 .order(created_at: :desc)
-                                 .page(params[:page])
+    @notifications = current_user.notifications.
+                       reads_with_avatar.
+                       order(created_at: :desc).
+                       page(params[:page])
   end
 
   def show

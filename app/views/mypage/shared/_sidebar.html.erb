@@ -9,6 +9,22 @@
   <!-- Collapse navbar -->
   <div class="collapse navbar-collapse" id="sidenav">
     <div class="navbar-nav flex-column">
+        <div class="d-flex justify-content-center mb-4">
+          <a href="<%= mypage_following_path %>" class='mx-3 text-center'>
+            <strong id="following">
+              <%= current_user.following.count %>
+            </strong>
+            <br>
+            フォロー中
+          </a>
+          <a href="<%= mypage_followers_path %>" class='mx-3 text-center'>
+            <strong id="followers">
+              <%= current_user.followers.count %>
+            </strong>
+            <br>
+            フォロワー
+          </a>
+        </div>
       <span class="navbar-header">Events</span>
       <ul class="list-unstyled ms-n2 mb-4">
         <!-- Nav item -->

@@ -12,7 +12,8 @@ class Notification < ApplicationRecord
     created_event: 0,
     commented_to_event: 1,
     attended_to_event: 2,
-    liked_event: 3
+    liked_event: 3,
+    following_attended_to_event: 4,
   }, _prefix: true
 
   scope :with_avatar, -> { preload(sender: { avatar_attachment: :blob }) }
@@ -24,7 +25,7 @@ class Notification < ApplicationRecord
       sender: event.user,
       notifiable: event,
       read: false,
-      message: "#{event.user.name}がイベントを作りました"
+      message: "#{event.user.name}がイベントを作りました",
     )
   end
 
@@ -35,7 +36,7 @@ class Notification < ApplicationRecord
       sender: comment.user,
       notifiable: comment,
       read: false,
-      message: "#{comment.user.name}がイベント【#{comment.event.title}】にコメントしました"
+      message: "#{comment.user.name}がイベント【#{comment.event.title}】にコメントしました",
     )
   end
 
@@ -46,7 +47,7 @@ class Notification < ApplicationRecord
       sender: event_attendance.user,
       notifiable: event_attendance,
       read: false,
-      message: "#{event_attendance.user.name}がイベント【#{event_attendance.event.title}】に参加しました"
+      message: "#{event_attendance.user.name}がイベント【#{event_attendance.event.title}】に参加しました",
     )
   end
 
@@ -57,11 +58,21 @@ class Notification < ApplicationRecord
       sender: bookmark.user,
       notifiable: bookmark,
       read: false,
-      message: "#{bookmark.user.name}がイベント【#{bookmark.event.title}】をブックマークしました"
+      message: "#{bookmark.user.name}がイベント【#{bookmark.event.title}】をブックマークしました",
     )
   end
 
-  # rubocop:disable Metrics/MethodLength
+  def self.following_attended_to_event(event_attendance, receiver)
+    Notification.create!(
+      kind: :following_attended_to_event,
+      receiver: receiver,
+      sender: event_attendance.user,
+      notifiable: event_attendance,
+      read: false,
+      message: "#{event_attendance.user.name}が参加するイベントがありました",
+    )
+  end
+
   def path
     return '#' if notifiable.blank?
 
@@ -78,5 +89,4 @@ class Notification < ApplicationRecord
     end
     # rubocop:enable Lint/DuplicateBranch
   end
-  # rubocop:enable Metrics/MethodLength
 end
